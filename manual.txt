@@ -11,3 +11,6 @@ python manage.py startapp dish
 # добавляю модель блюда
 python manage.py makemigrations
 python manage.py migrate
+pip install djangorestframework
+pip install markdown
+pip install django-filter
