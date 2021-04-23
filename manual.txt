@@ -1,0 +1,7 @@
+создать проект в github с .gitignore
+git clone https://github.com/Amankaium/plovo.git
+cd plovo
+python -m venv venv
+call venv\Scripts\activate
+pip install django
+django-admin startproject plovo .
