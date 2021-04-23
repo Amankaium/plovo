@@ -1,7 +1,13 @@
-создать проект в github с .gitignore
+# создать проект в github с .gitignore
 git clone https://github.com/Amankaium/plovo.git
 cd plovo
 python -m venv venv
 call venv\Scripts\activate
 pip install django
 django-admin startproject plovo .
+python manage.py migrate
+python manage.py startapp dish
+# в settings надо добавить dish в INSTALLED_APPS
+# добавляю модель блюда
+python manage.py makemigrations
+python manage.py migrate
