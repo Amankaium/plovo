@@ -39,6 +39,6 @@ class DishUpdateAPIView(APIView):
             dish.price = serializer.validated_data.get('price')
             dish.save()
             serialized_object = DishSerializer(dish)
-            data = serialized_object.data
-            return Response(data=data)        
+            json_data = serialized_object.data
+            return Response(data=json_data)        
         return Response(data=serializer.errors)
