@@ -7,9 +7,6 @@ from .serializers import *
 
 
 class DishListAPIView(APIView):
-    # queryset = Dish.objects.order_by('name')
-    # serializer_class = DishListSerializer
-
     def get(self, request, *args, **kwargs):
         dishes = Dish.objects.order_by('name')         
         dishes_serialized = DishListSerializer(dishes, many=True)        
@@ -42,3 +39,17 @@ class DishUpdateAPIView(APIView):
             json_data = serialized_object.data
             return Response(data=json_data)        
         return Response(data=serializer.errors)
+
+
+class DishDetailAPIView(APIView):
+    def get(self, request, *args, **kwargs):
+        dish_object = Dish.objects.get(pk=kwargs.get('pk'))
+        serializer = DishSerializer(instance=dish_object)
+        return Response(data=serializer.data)
+
+
+class DishDeleteAPIView(APIView):
+    def delete(self, request, *args, **kwargs):
+        dish = Dish.objects.get(pk=kwargs.get('pk'))
+        dish.delete()
+        return Response(data={'message': 'Блюдо было удалено'})
