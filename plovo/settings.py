@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'dish',
     'order',
+    'users',
 ]
 
 MIDDLEWARE = [
