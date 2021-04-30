@@ -24,6 +24,7 @@ class Order(models.Model):
         (0, 'Accepted'),
         (1, 'Completed'),
         (2, 'Canceled'),
+        (3, 'Deleted'),
     ))
 
     def __str__(self):

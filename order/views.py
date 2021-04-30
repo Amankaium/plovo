@@ -21,10 +21,24 @@ class OrderListCreateView(APIView):
 
 class OrderView(APIView):
     def get(self, request, *args, **kwargs):
-        pass
+        try:
+            order = Order.objects.get(pk=kwargs.get('pk'))
+        except Order.DoesNotExist as e:
+            return Response(data={"message": f'Order was not found: {e}'}, status=404)
+        
+        serializer = OrderSerializer(instance=order)
+        return Response(data=serializer.data)
 
-    def update(self, request, *args, **kwargs):
-        pass
+    def put(self, request, *args, **kwargs):
+        order = Order.objects.get(pk=kwargs.get('pk'))
+        serializer = OrderSerializer(instance=order, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
 
     def delete(self, request, *args, **kwargs):
-        pass
+        order = Order.objects.get(pk=kwargs.get('pk'))
+        order.status = 3
+        order.save()
+        return Response(data={'message': 'Order successfully deleted'})
