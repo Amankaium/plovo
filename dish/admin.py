@@ -5,8 +5,8 @@ from .models import Dish
 class DishAdmin(admin.ModelAdmin):
     list_display = ('name', 'price')
     search_fields = ['name']
-
     fields = ('name', 'price')
     readonly_fields = ['name']
+
 
 admin.site.register(Dish, DishAdmin)
