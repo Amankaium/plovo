@@ -4,7 +4,7 @@ from .models import Order
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('phone', 'dish', 'location', 'status')
     list_editable = ("status",)
-    search_fields = ('dish__name', 'locations')
+    search_fields = ('dish__name', 'location')
     list_filter = ('status',)
 
 admin.site.register(Order, OrderAdmin)
