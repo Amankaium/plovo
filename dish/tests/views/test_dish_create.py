@@ -43,7 +43,7 @@ class TestDishCreateAPITestCase(APITestCase):
         expected_data = {
             "price": [
                 "This field is required."
-            ]
+            ], 
         }
 
         self.assertEqual(response.data, expected_data)

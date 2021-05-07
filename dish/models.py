@@ -5,7 +5,7 @@ class Dish(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField()
     is_avialable = models.BooleanField(default=True)
-    calories = models.IntegerField(null=False, blank=False)
+    calories = models.IntegerField(null=True, blank=True, default=0)
 
     class Meta:
         verbose_name = 'блюдо'
