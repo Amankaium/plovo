@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
+from rest_framework import status
 
 from .models import Dish
 from .serializers import *
@@ -19,8 +20,8 @@ class DishCreateAPIView(APIView):
         serializer = DishCreateSerializer(data=data)
         if serializer.is_valid():
             dish_object = serializer.save()
-            return Response(data={'message': 'Блюдо успешно добавлено'})
-        return Response(data=serializer.errors)
+            return Response(data={'message': 'Блюдо успешно добавлено'}, status=201)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DishUpdateAPIView(APIView):
