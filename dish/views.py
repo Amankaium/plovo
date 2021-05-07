@@ -56,4 +56,4 @@ class DishDeleteAPIView(APIView):
     def delete(self, request, *args, **kwargs):
         dish = Dish.objects.get(pk=kwargs.get('pk'))
         dish.delete()
-        return Response(data={'message': 'Блюдо было удалено'})
+        return Response(data={'message': 'Блюдо было удалено'}, status=status.HTTP_204_NO_CONTENT)
