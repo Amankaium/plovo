@@ -12,7 +12,8 @@ class DishListSerializer(serializers.ModelSerializer):
 class DishCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dish
-        fields = ('name', 'price')
+        # fields = ('name', 'price')
+        exclude = ['id']
 
 
 class DishUpdateSerializer(serializers.ModelSerializer):

@@ -4,6 +4,7 @@ from django.db import models
 class Dish(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField()
+    is_avialable = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = 'блюдо'
