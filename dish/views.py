@@ -44,9 +44,12 @@ class DishUpdateAPIView(APIView):
 
 class DishDetailAPIView(APIView):
     def get(self, request, *args, **kwargs):
-        dish_object = Dish.objects.get(pk=kwargs.get('pk'))
-        serializer = DishSerializer(instance=dish_object)
-        return Response(data=serializer.data)
+        try:
+            dish_object = Dish.objects.get(pk=kwargs.get('pk'))
+            serializer = DishSerializer(instance=dish_object)
+            return Response(data=serializer.data)
+        except Dish.DoesNotExist as e:
+            return Response(data=f"{e}", status=status.HTTP_404_NOT_FOUND)
 
 
 class DishDeleteAPIView(APIView):
