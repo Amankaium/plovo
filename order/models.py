@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from dish.models import Dish
+from core.models import BaseModel
 
 # Create your models here.
 class Order(models.Model):
@@ -33,3 +34,24 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'заказ'
         verbose_name_plural = 'Заказы'
+
+
+class AdditionDish(BaseModel):
+    dish = models.ForeignKey(
+        to=Dish,
+        on_delete=models.CASCADE,
+        related_name='addition_dish'
+    )
+
+    order = models.ForeignKey(
+        to=Order,
+        on_delete=models.CASCADE,
+        related_name='addition_dish'
+    )
+
+    def __str__(self):
+        return self.dish.name
+
+    class Meta:
+        verbose_name = 'Доп. блюдо'
+        verbose_name_plural = 'Доп. блюда'
