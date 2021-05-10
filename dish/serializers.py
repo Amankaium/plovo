@@ -25,3 +25,9 @@ class DishSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dish
         fields = ('id', 'name', 'price')
+    
+
+class DishNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Dish
+        fields = ['name']
