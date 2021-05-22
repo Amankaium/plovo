@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order
+from .models import Order, Restaurant
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('phone', 'dish', 'location', 'status')
@@ -8,3 +8,4 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('status',)
 
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Restaurant)
