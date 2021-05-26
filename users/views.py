@@ -21,7 +21,6 @@ class UserRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
 
 
-
 class RegistrationAPIView(APIView):
     def post(self, request, *args, **kwargs):
         user_object = RegistrationSerializer(data=request.POST)
@@ -33,7 +32,7 @@ class RegistrationAPIView(APIView):
                 user.username = user_object.validated_data.get("username")
                 user.email = user_object.validated_data.get("email")
                 user.first_name = user_object.validated_data.get("first_name")
-                user.last_name = user_object.validated_data.get("username")
+                user.last_name = user_object.validated_data.get("last_name")
                 user.set_password(password_1)
                 user.save()
                 return Response(data=UserSerialier(user).data, status=status.HTTP_201_CREATED)
