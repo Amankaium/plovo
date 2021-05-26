@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'djoser',
 
     'dish',
     'order',
@@ -77,6 +78,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'plovo.wsgi.application'
 
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
+DJOSER = {
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': False,
+}
+
+
+AUTH_USER_MODEL = 'users.User'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
