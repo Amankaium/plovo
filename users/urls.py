@@ -7,4 +7,5 @@ urlpatterns = [
     path('api-auth', include('rest_framework.urls')),
     path('auth/', include('djoser.urls')),
     path('registr/', RegistrUserView.as_view(), name='registr')
+    path('registration/', RegistrationAPIView.as_view(), name='registration')
 ]

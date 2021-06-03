@@ -12,6 +12,7 @@ class UserSerialier(serializers.ModelSerializer):
 
 
 
+
 class UserRegistrSerializer(serializers.ModelSerializer):
     # Поле для повторения пароля
     password2 = serializers.CharField()
@@ -44,3 +45,13 @@ class UserRegistrSerializer(serializers.ModelSerializer):
         user.save()
         # Возвращаем нового пользователя
         return user
+
+class RegistrationSerializer(serializers.ModelSerializer):
+    password_1 = serializers.CharField(max_length=255)
+    password_2 = serializers.CharField(max_length=255)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password_1', 'password_2',
+                  'first_name', 'last_name']
+
