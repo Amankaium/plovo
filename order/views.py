@@ -4,6 +4,12 @@ from rest_framework.response import Response
 from .serializers import OrderSerializer
 from .models import Order
 
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter 
+from rest_auth.registration.views import SocialLoginView 
+
+class FacebookLogin(SocialLoginView): 
+    adapter_class = FacebookOAuth2Adapter
+
 class OrderListCreateView(APIView):
     def get(self, request, *args, **kwargs):
         orders = Order.objects.all()
