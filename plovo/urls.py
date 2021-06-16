@@ -21,4 +21,10 @@ urlpatterns = [
     path('dish/', include('dish.urls')),
     path('order/', include('order.urls')),
     path('users/', include('users.urls')),
+    
+    path('api/<version>/rest-auth/', include('rest_auth.urls')),
+    path('api/<version>/rest-auth/', include('rest_auth.urls')), 
+    path('api/<version>/rest-auth/registration/', include('rest_auth.registration.urls'))
+
 ]
+

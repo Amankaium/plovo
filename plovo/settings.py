@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,6 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-ih0+i^_5g71*jgn@+8nb3t74!uua-yjf9^_39gsoz8#ht2i@z-'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        "APP": {
+            "client_id": config('AUTH_FACEBOOK_KEY'),
+            "secret": config('AUTH_FACEBOOK_SECRET'),
+        },
+    }
+}
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,12 +51,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_auth',
+    'django.contrib.sites', 
+    'allauth', 
+    'allauth.account', 
+    'rest_auth.registration',
+    'allauth.socialaccount', 
+    'allauth.socialaccount.providers.facebook',
+    'rest_framework.authtoken',
 
     'dish',
     'order',
     'users',
     'core',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
