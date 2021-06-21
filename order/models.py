@@ -20,6 +20,7 @@ class Order(models.Model):
 
     location = models.CharField(max_length=500)
     phone = models.CharField(max_length=20)
+    email = models.EmailField(null=True, blank=False)
     discount = models.BooleanField(default=False)
     discount_sum = models.IntegerField(default=0)
     status = models.IntegerField(default=0, choices=(

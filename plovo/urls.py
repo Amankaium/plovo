@@ -21,4 +21,5 @@ urlpatterns = [
     path('dish/', include('dish.urls')),
     path('order/', include('order.urls')),
     path('users/', include('users.urls')),
+    path("email/", include("spammer.urls")),
 ]
