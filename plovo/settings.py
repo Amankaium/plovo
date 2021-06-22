@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
 
+
     'dish',
     'order',
     'users',
