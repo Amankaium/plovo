@@ -36,34 +36,34 @@ class UserRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 
 
 
-# # Создаём класс RegistrUserView
-# class RegistrUserView(CreateAPIView):
-#     # Добавляем в queryset
-#     queryset = User.objects.all()
-#     # Добавляем serializer UserRegistrSerializer
-#     serializer_class = UserRegistrSerializer
-#     # Добавляем права доступа
-#     permission_classes = [AllowAny]
-#
-#     # Создаём метод для создания нового пользователя
-#     def post(self, request, *args, **kwargs):
-#         # Добавляем UserRegistrSerializer
-#         serializer = UserRegistrSerializer(data=request.data)
-#         # Создаём список data
-#         data = {}
-#         # Проверка данных на валидность
-#         if serializer.is_valid():
-#             # Сохраняем нового пользователя
-#             serializer.save()
-#             # Добавляем в список значение ответа True
-#             data['response'] = True
-#             # Возвращаем что всё в порядке
-#             return Response(data, status=status.HTTP_201_CREATED)
-#         else:  # Иначе
-#             # Присваиваем data ошибку
-#             data = serializer.errors
-#             # Возвращаем ошибку
-#             return Response(data)
+# Создаём класс RegistrUserView
+class RegistrUserView(CreateAPIView):
+    # Добавляем в queryset
+    queryset = User.objects.all()
+    # Добавляем serializer UserRegistrSerializer
+    serializer_class = UserRegistrSerializer
+    # Добавляем права доступа
+    permission_classes = [AllowAny]
+
+    # Создаём метод для создания нового пользователя
+    def post(self, request, *args, **kwargs):
+        # Добавляем UserRegistrSerializer
+        serializer = UserRegistrSerializer(data=request.data)
+        # Создаём список data
+        data = {}
+        # Проверка данных на валидность
+        if serializer.is_valid():
+            # Сохраняем нового пользователя
+            serializer.save()
+            # Добавляем в список значение ответа True
+            data['response'] = True
+            # Возвращаем что всё в порядке
+            return Response(data, status=status.HTTP_201_CREATED)
+        else:  # Иначе
+            # Присваиваем data ошибку
+            data = serializer.errors
+            # Возвращаем ошибку
+            return Response(data)
 
 class RegistrationAPIView(APIView):
     def post(self, request, *args, **kwargs):
@@ -75,8 +75,6 @@ class RegistrationAPIView(APIView):
                 user = User()
                 user.username = user_object.validated_data.get("username")
                 user.email = user_object.validated_data.get("email")
-                user.first_name = user_object.validated_data.get("first_name")
-                user.last_name = user_object.validated_data.get("last_name")
                 user.set_password(password_1)
                 user.save()
                 return Response(data=UserSerialier(user).data, status=status.HTTP_201_CREATED)
