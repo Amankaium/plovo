@@ -16,7 +16,8 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('status',)
     inlines = [AdditionDishInline]
 
-admin.site.register(Order, OrderAdmin, Restaurant)
+admin.site.register(Order, OrderAdmin)
+admin.site.register(Restaurant)
 
 
 class AdditionDishAdmin(admin.ModelAdmin):
