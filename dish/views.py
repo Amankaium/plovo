@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
+from rest_framework import status
 
 from .models import Dish
 from .serializers import *
@@ -19,8 +20,8 @@ class DishCreateAPIView(APIView):
         serializer = DishCreateSerializer(data=data)
         if serializer.is_valid():
             dish_object = serializer.save()
-            return Response(data={'message': 'Блюдо успешно добавлено'})
-        return Response(data=serializer.errors)
+            return Response(data={'message': 'Блюдо успешно добавлено'}, status=201)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DishUpdateAPIView(APIView):
@@ -43,13 +44,16 @@ class DishUpdateAPIView(APIView):
 
 class DishDetailAPIView(APIView):
     def get(self, request, *args, **kwargs):
-        dish_object = Dish.objects.get(pk=kwargs.get('pk'))
-        serializer = DishSerializer(instance=dish_object)
-        return Response(data=serializer.data)
+        try:
+            dish_object = Dish.objects.get(pk=kwargs.get('pk'))
+            serializer = DishSerializer(instance=dish_object)
+            return Response(data=serializer.data)
+        except Dish.DoesNotExist as e:
+            return Response(data=f"{e}", status=status.HTTP_404_NOT_FOUND)
 
 
 class DishDeleteAPIView(APIView):
     def delete(self, request, *args, **kwargs):
         dish = Dish.objects.get(pk=kwargs.get('pk'))
         dish.delete()
-        return Response(data={'message': 'Блюдо было удалено'})
+        return Response(data={'message': 'Блюдо было удалено'}, status=status.HTTP_204_NO_CONTENT)

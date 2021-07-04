@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 
 from dish.models import Dish
+from core.models import BaseModel
 
 
 class Restaurant(models.Model):
@@ -58,4 +59,24 @@ class Order(models.Model):
         verbose_name = 'заказ'
         verbose_name_plural = 'Заказы'
 
+
+class AdditionDish(BaseModel):
+    dish = models.ForeignKey(
+        to=Dish,
+        on_delete=models.CASCADE,
+        related_name='addition_dish'
+    )
+
+    order = models.ForeignKey(
+        to=Order,
+        on_delete=models.CASCADE,
+        related_name='addition_dish'
+    )
+
+    def __str__(self):
+        return self.dish.name
+
+    class Meta:
+        verbose_name = 'Доп. блюдо'
+        verbose_name_plural = 'Доп. блюда'
 
