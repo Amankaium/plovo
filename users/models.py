@@ -43,6 +43,8 @@ class MyUserManager(BaseUserManager):
 # Создаём класс User
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.AutoField(primary_key=True, unique=True)  # Идентификатор
+    first_name = models.CharField(max_length=50, null=True, blank=True)
+    last_name = models.CharField(max_length=50, null=True, blank=True)
     username = models.CharField(max_length=50, unique=True)  # Логин
     email = models.EmailField(max_length=100, unique=True)  # Email
     is_active = models.BooleanField(default=True)  # Статус активации

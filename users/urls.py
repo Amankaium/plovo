@@ -1,10 +1,10 @@
 from django.urls import path, include
 from .views import (UserListCreateAPIView,
-                    UserRetrieveUpdateDestroyAPIView, RegistrUserView,)
+                    UserRetrieveUpdateDestroyAPIView, RegistrationAPIView,)
 urlpatterns = [
     path('', UserListCreateAPIView.as_view(), name='users'),
     path('<int:pk>/', UserRetrieveUpdateDestroyAPIView.as_view(), name='user'),
     path('api-auth', include('rest_framework.urls')),
     path('auth/', include('djoser.urls')),
-    path('registr/', RegistrUserView.as_view(), name='registr'),
+    path('registr/', RegistrationAPIView.as_view(), name='registr'),
 ]
