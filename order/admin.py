@@ -1,9 +1,12 @@
 from django.contrib import admin
-from .models import Order, AdditionDish
+
+
+from .models import Order, AdditionDish, Restaurant
 
 class AdditionDishInline(admin.TabularInline):
     model = AdditionDish
     extra = 0
+
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -14,6 +17,7 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [AdditionDishInline]
 
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Restaurant)
 
 
 class AdditionDishAdmin(admin.ModelAdmin):
@@ -22,3 +26,4 @@ class AdditionDishAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
 
 admin.site.register(AdditionDish, AdditionDishAdmin)
+ 
