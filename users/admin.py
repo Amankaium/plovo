@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from users.models import User
+from .models import User
 
 
 class UserCreationForm(forms.ModelForm):
@@ -15,7 +15,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', )
+        fields = ('email',)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -43,7 +43,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'is_active')
+        fields = ('first_name', 'last_name', 'username', 'email', 'password', 'is_active', 'is_superuser')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -60,17 +60,17 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', )
+    list_display = ('email', 'is_superuser')
     list_filter = ('email',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('first_name','last_name', 'username', 'email', 'password', 'is_active', 'is_superuser')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2'),
+            'fields': ('first_name', 'last_name', 'username', 'email', 'password1', 'password2', 'is_active', 'is_superuser'),
         }),
     )
     search_fields = ('email',)
